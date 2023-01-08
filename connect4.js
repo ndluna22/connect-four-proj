@@ -19,7 +19,7 @@ function makeBoard() {
   // TODO: set "board" to empty HEIGHT x WIDTH matrix array
 
     for(let y = 0; y < HEIGHT; y++) {  
-      board.push([]);
+      board.push([]);     
     for(let x = 0; x < WIDTH; x++) {   
       board[y].push(null);    
     }
@@ -33,26 +33,25 @@ function makeHtmlBoard() {
   // TODO: get "htmlBoard" variable from the item in HTML w/ID of "board"
   const htmlBoard = document.querySelector("#board");
 
-  // Const top is a created variable for column. 
-  const top = document.createElement("tr");
-  top.setAttribute("id", "column-top"); //gives id of column-top to the columns
-  top.addEventListener("click", handleClick); //Addevent listener to click on column variable
+  
+  const top = document.createElement("tr");    // Const top is a created variable for table row. 
+  top.setAttribute("id", "column-top");       //gives id of column-top to variable top
+  top.addEventListener("click", handleClick);   //Addevent listener to click on tr 
 
-  //loop iterates to width which is equal to 6 times. 
   for (let x = 0; x < WIDTH; x++) {
-    const headCell = document.createElement("td");  //row element is created and  set to variable headCell
-    headCell.setAttribute("id", x); //headCell(row) is now set AS x
-    top.append(headCell);  //headCell, or rows, are added to the top column
+    const headCell = document.createElement("td");    //row element is created and  set to variable headCell
+    headCell.setAttribute("id", x);       //headCell(row) is now set AS x
+    top.append(headCell);        //headCell, or rows, are added to the top column
   }
   htmlBoard.append(top); //headCell, or rows, are added to the top of the board
 
-  // loop iterates to height which is equal to 7 times
+  
   for (let y = 0; y < HEIGHT; y++) {
-    const row = document.createElement("tr"); //tr, which are columns, is assigned to variable row
-    for (let x = 0; x < WIDTH; x++) {  // loop interates to width 6 times
-      const cell = document.createElement("td"); // row element is created and set to variable cell
-      cell.setAttribute("id", `${y}-${x}`); //      // above element is set an id to y-x
-      row.append(cell); //      // the cell, is added to the top row.
+    const row = document.createElement("tr");    //tr, which are columns, is assigned to variable row
+    for (let x = 0; x < WIDTH; x++) {        // loop interates to width 6 times
+      const cell = document.createElement("td");    // row element is created and set to variable cell
+      cell.setAttribute("id", `${y}-${x}`);      // above element is set an id to y-x
+      row.append(cell);         // the cell, is added to the top row.
     }
     htmlBoard.append(row);// created row (tr) is then added to the initial row. 
   }
@@ -62,11 +61,11 @@ function makeHtmlBoard() {
 
 function findSpotForCol(x) {
   for (let y = HEIGHT - 1; y >= 0; y--) { //reverse for loop. starts from end of array and keeps removing
-    if (!board[y][x]) {  //if board is not complete
-      return y; // then return y
+    if (!board[y][x]) {  //if board is not complete or filled
+      return y; // then return y column
     }
   }
-  return null;  //return bull if board is full
+  return null;  //if true, return empty
 }
 
 /** placeInTable: update DOM to place piece into HTML table of board */
@@ -104,7 +103,7 @@ function handleClick(evt) {
   }
 
   // place piece in board and add to HTML table
-  // TODO: add line to update in-memory board
+  // add line to update in-memory board
   board[y][x] = currPlayer;
   placeInTable(y, x);
   
@@ -156,8 +155,8 @@ function checkForWin() {
 
   // TODO: read and understand this code. Add comments to help you.
 
-  for (let y = 0; y < HEIGHT; y++) {   //loops through height lenght which is 6
-    for (let x = 0; x < WIDTH; x++) {  //loops through width which is 7
+  for (let y = 0; y < HEIGHT; y++) {   //loops through height lenght 
+    for (let x = 0; x < WIDTH; x++) {  //loops through width length
       //below: below cells are checked for win possibilites. 
       const horiz = [[y, x], [y, x + 1], [y, x + 2], [y, x + 3]];
       const vert = [[y, x], [y + 1, x], [y + 2, x], [y + 3, x]];
