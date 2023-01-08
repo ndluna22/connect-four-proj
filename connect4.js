@@ -16,7 +16,7 @@ let  board = []; // array of rows, each row is array of cells  (board[y][x])
  */
 
 function makeBoard() {
-  // TODO: set "board" to empty HEIGHT x WIDTH matrix array
+  // set "board" to empty HEIGHT x WIDTH matrix array
 
     for(let y = 0; y < HEIGHT; y++) {  
       board.push([]);     
@@ -30,7 +30,7 @@ function makeBoard() {
 /** makeHtmlBoard: make HTML table and row of column tops. */
 
 function makeHtmlBoard() {
-  // TODO: get "htmlBoard" variable from the item in HTML w/ID of "board"
+  // get "htmlBoard" variable from the item in HTML w/ID of "board"
   const htmlBoard = document.querySelector("#board");
 
   
@@ -38,7 +38,9 @@ function makeHtmlBoard() {
   top.setAttribute("id", "column-top");       //gives id of column-top to variable top
   top.addEventListener("click", handleClick);   //Addevent listener to click on tr 
 
-  for (let x = 0; x < WIDTH; x++) {
+  
+  //top board section
+  for (let x = 0; x < WIDTH; x++) {  //loop through x 
     const headCell = document.createElement("td");    //row element is created and  set to variable headCell
     headCell.setAttribute("id", x);       //headCell(row) is now set AS x
     top.append(headCell);        //headCell, or rows, are added to the top column
@@ -46,9 +48,9 @@ function makeHtmlBoard() {
   htmlBoard.append(top); //headCell, or rows, are added to the top of the board
 
   
-  for (let y = 0; y < HEIGHT; y++) {
+  for (let y = 0; y < HEIGHT; y++) {   //loop interates through y
     const row = document.createElement("tr");    //tr, which are columns, is assigned to variable row
-    for (let x = 0; x < WIDTH; x++) {        // loop interates to width 6 times
+    for (let x = 0; x < WIDTH; x++) {        // loop interates through x
       const cell = document.createElement("td");    // row element is created and set to variable cell
       cell.setAttribute("id", `${y}-${x}`);      // above element is set an id to y-x
       row.append(cell);         // the cell, is added to the top row.
@@ -61,7 +63,7 @@ function makeHtmlBoard() {
 
 function findSpotForCol(x) {
   for (let y = HEIGHT - 1; y >= 0; y--) { //reverse for loop. starts from end of array and keeps removing
-    if (!board[y][x]) {  //if board is not complete or filled
+    if (!board[y][x]) {  //check if x in row is not complete or filled
       return y; // then return y column
     }
   }
@@ -71,22 +73,21 @@ function findSpotForCol(x) {
 /** placeInTable: update DOM to place piece into HTML table of board */
 
 function placeInTable(y, x) {
-  // TODO: make a div and insert into correct table cell
+  // make a div and insert into correct table cell
 
-  const piece = document.createElement('div');
-  piece.classList.add('piece');
-  piece.classList.add(`player${currPlayer}`);
+  const piece = document.createElement('div');   //create variable for piece
+  piece.classList.add('piece');  //classlist of piece is added
+  piece.classList.add(`player${currPlayer}`); //classlist to differentiate player 1 and 2
   
 
-  const spot = document.getElementById(`${y}-${x}`);
-  spot.append(piece);
+  const spot = document.getElementById(`${y}-${x}`);  //create a variable for div with x and y 
+  spot.append(piece);   //adds 
 }
 
 /** endGame: announce game end */
 
 function endGame(msg) {
-  // TODO: pop up alert message
-  return alert(msg);
+  return alert(msg);     //  alert message to announce game end
 
 }
 
@@ -104,25 +105,25 @@ function handleClick(evt) {
 
   // place piece in board and add to HTML table
   // add line to update in-memory board
-  board[y][x] = currPlayer;
+  board[y][x] = currPlayer;  
   placeInTable(y, x);
   
 
   // check for win
-  if (checkForWin()) {
-    setTimeout (function(){
+  if (checkForWin()) {     //runs checkForWin Function below
+    setTimeout (function(){    //timeout is set for alert to pop up after piece is dropped
     return endGame(`Player ${currPlayer} won!`);
     },300);
   }
-    else if(checkForTie()){
-      setTimeout(function(){
+    else if(checkForTie()){   //runs checkForTie Function below
+      setTimeout(function(){. //timeout is set for alert to pop up after piece is dropped
       return endGame('Tie!');
       },300);
     }
   
    
   // check for tie
-  // TODO: check if all cells in board are filled; if so call, call endGame
+  // below checks if all cells in board are filled; if so call, call endGame
  
   function checkForTie (){
     return board.every((row) => row.every((cell) => cell));
@@ -130,7 +131,7 @@ function handleClick(evt) {
   }
 
 
-currPlayer = currPlayer === 1 ? 2 : 1;
+currPlayer = currPlayer === 1 ? 2 : 1;   //switches current player from 1 to two 
 
   console.log(currPlayer);
   
@@ -155,13 +156,13 @@ function checkForWin() {
 
   // TODO: read and understand this code. Add comments to help you.
 
-  for (let y = 0; y < HEIGHT; y++) {   //loops through height lenght 
-    for (let x = 0; x < WIDTH; x++) {  //loops through width length
+  for (let y = 0; y < HEIGHT; y++) {   //loops through y
+    for (let x = 0; x < WIDTH; x++) {  //loops through x
       //below: below cells are checked for win possibilites. 
-      const horiz = [[y, x], [y, x + 1], [y, x + 2], [y, x + 3]];
-      const vert = [[y, x], [y + 1, x], [y + 2, x], [y + 3, x]];
-      const diagDR = [[y, x], [y + 1, x + 1], [y + 2, x + 2], [y + 3, x + 3]];
-      const diagDL = [[y, x], [y + 1, x - 1], [y + 2, x - 2], [y + 3, x - 3]];
+      const horiz = [[y, x], [y, x + 1], [y, x + 2], [y, x + 3]]; //horizontal streak
+      const vert = [[y, x], [y + 1, x], [y + 2, x], [y + 3, x]];  //vertical streak
+      const diagDR = [[y, x], [y + 1, x + 1], [y + 2, x + 2], [y + 3, x + 3]]; //diagonal right streak
+      const diagDL = [[y, x], [y + 1, x - 1], [y + 2, x - 2], [y + 3, x - 3]];  //diagonal left streak
 
       if (_win(horiz) || _win(vert) || _win(diagDR) || _win(diagDL)) {
         return true;  //if any of the four of the top are true, then return as winner  
