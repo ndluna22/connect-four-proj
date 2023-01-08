@@ -49,14 +49,13 @@ function makeHtmlBoard() {
 
   
   for (let y = 0; y < HEIGHT; y++) {   //loop interates through y
-    const row = document.createElement("tr");    //tr, which are columns, is assigned to variable row
+    const row = document.createElement("tr");    //tr is created and assigned to variable row
     for (let x = 0; x < WIDTH; x++) {        // loop interates through x
-      const cell = document.createElement("td");    // row element is created and set to variable cell
+      const cell = document.createElement("td");    // td is created and set to variable cell
       cell.setAttribute("id", `${y}-${x}`);      // above element is set an id to y-x
       row.append(cell);         // the cell, is added to the top row.
     }
-    htmlBoard.append(row);// created row (tr) is then added to the initial row. 
-  }
+    htmlBoard.append(row); // created tr is appended to htmpboard
 }
 
 /** findSpotForCol: given column x, return top empty y (null if filled) */
