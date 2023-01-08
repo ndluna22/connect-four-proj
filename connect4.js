@@ -18,9 +18,9 @@ let  board = []; // array of rows, each row is array of cells  (board[y][x])
 function makeBoard() {
   // set "board" to empty HEIGHT x WIDTH matrix array
 
-    for(let y = 0; y < HEIGHT; y++) {  
+    for(let y = 0; y < HEIGHT; y++) {   //loop through y grid push empty array
       board.push([]);     
-    for(let x = 0; x < WIDTH; x++) {   
+    for(let x = 0; x < WIDTH; x++) {   //loop through x grid push null
       board[y].push(null);    
     }
     }
@@ -41,7 +41,7 @@ function makeHtmlBoard() {
   
   //top board section
   for (let x = 0; x < WIDTH; x++) {  //loop through x 
-    const headCell = document.createElement("td");    //row element is created and  set to variable headCell
+    const headCell = document.createElement("td");    //row element is created and set to variable headCell
     headCell.setAttribute("id", x);       //headCell(row) is now set AS x
     top.append(headCell);        //headCell, or rows, are added to the top column
   }
@@ -55,11 +55,12 @@ function makeHtmlBoard() {
       cell.setAttribute("id", `${y}-${x}`);      // above element is set an id to y-x
       row.append(cell);         // the cell, is added to the top row.
     }
-    htmlBoard.append(row); // created tr is appended to htmpboard
+    htmlBoard.append(row); // created tr is appended to htmlboard
 }
 
 /** findSpotForCol: given column x, return top empty y (null if filled) */
-
+            //will be used later in handleclick event
+      
 function findSpotForCol(x) {
   for (let y = HEIGHT - 1; y >= 0; y--) { //reverse for loop. starts from end of array and keeps removing
     if (!board[y][x]) {  //check if x in row is not complete or filled
@@ -79,8 +80,8 @@ function placeInTable(y, x) {
   piece.classList.add(`player${currPlayer}`); //classlist to differentiate player 1 and 2
   
 
-  const spot = document.getElementById(`${y}-${x}`);  //create a variable for div with x and y 
-  spot.append(piece);   //adds 
+  const spot = document.getElementById(`${y}-${x}`);  //create a variable for with x and y 
+  spot.append(piece);   //append to the piece variable
 }
 
 /** endGame: announce game end */
@@ -129,9 +130,10 @@ function handleClick(evt) {
   
   }
 
+      
+ //switch current player from 1 to two 
 
-currPlayer = currPlayer === 1 ? 2 : 1;   //switches current player from 1 to two 
-
+currPlayer = currPlayer === 1 ? 2 : 1;   
   console.log(currPlayer);
   
 }
