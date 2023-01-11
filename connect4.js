@@ -9,7 +9,7 @@ const WIDTH = 7;
 const HEIGHT = 6;
 
 let  currPlayer = 1; // active player: 1 or 2
-let  board = []; // array of rows, each row is array of cells  (board[y][x])
+let  board = []; // // array of rows, each row is array of cells  (board[y][x])
 
 
 
@@ -50,7 +50,7 @@ function makeHtmlBoard() {
   
   for (let y = 0; y < HEIGHT; y++) {   //loop interates through y
     const row = document.createElement("tr");    //tr is created and assigned to variable row
-    for (let x = 0; x < WIDTH; x++) {        // loop interates through x
+  for (let x = 0; x < WIDTH; x++) {        // loop interates through x
       const cell = document.createElement("td");    // td is created and set to variable cell
       cell.setAttribute("id", `${y}-${x}`);      // above element is set an id to y-x
       row.append(cell);         // the cell, is added to the top row.
@@ -80,7 +80,7 @@ function placeInTable(y, x) {
   piece.classList.add(`player${currPlayer}`); //classlist to differentiate player 1 and 2
   
 
-  const spot = document.getElementById(`${y}-${x}`);  //create a variable for with x and y 
+  const spot = document.getElementById(`${y}-${x}`);  //create a variable for with x and y //access top element
   spot.append(piece);   //append to the piece variable
 }
 
@@ -94,8 +94,9 @@ function endGame(msg) {
 /** handleClick: handle click of column top to play piece */
 
 function handleClick(evt) {
-  // get x from ID of clicked cell
+  // get x from ID of clicked cell (triggers)
   const x = +evt.target.id;
+      
 
   // get next spot in column (if none, ignore click)
   const y = findSpotForCol(x);
@@ -145,7 +146,7 @@ function checkForWin() {
     //  - cells: list of four (y, x) cells
     //  - returns true if all are legal coordinates & all match currPlayer
 
-    return cells.every(
+    return cells.every(   //check that cells selected are part of the board
       ([y, x]) =>
         y >= 0 &&
         y < HEIGHT &&
