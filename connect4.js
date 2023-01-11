@@ -20,7 +20,7 @@ function makeBoard() {
 
     for(let y = 0; y < HEIGHT; y++) {   //loop through y grid push empty array
       board.push([]);     
-    for(let x = 0; x < WIDTH; x++) {   //loop through x grid push null
+    for(let x = 0; x < WIDTH; x++) {   //loop through x grid push null spaces
       board[y].push(null);    
     }
     }
@@ -94,19 +94,19 @@ function endGame(msg) {
 /** handleClick: handle click of column top to play piece */
 
 function handleClick(evt) {
-  // get x from ID of clicked cell (triggers)
+  // get x from ID of clicked cell (triggers this event)
   const x = +evt.target.id;
       
 
   // get next spot in column (if none, ignore click)
-  const y = findSpotForCol(x);
-  if (y === null) {
+  const y = findSpotForCol(x); 
+  if (y === null) {    //if no spots available, will return empty
     return;
   }
 
   // place piece in board and add to HTML table
   // add line to update in-memory board
-  board[y][x] = currPlayer;  
+  board[y][x] = currPlayer;   //set to current player
   placeInTable(y, x);
   
 
