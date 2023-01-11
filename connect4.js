@@ -40,7 +40,7 @@ function makeHtmlBoard() {
 
   
   //top board section
-  for (let x = 0; x < WIDTH; x++) {  //loop through x 
+  for (let x = 0; x < WIDTH; x++) {  //loop through x 7
     const headCell = document.createElement("td");    //row element is created and set to variable headCell
     headCell.setAttribute("id", x);       //headCell(row) is now set AS x
     top.append(headCell);        //headCell, or rows, are added to the top column
