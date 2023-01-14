@@ -127,8 +127,8 @@ function handleClick(evt) {
   // below checks if all cells in board are filled; if so call, call endGame
  
   function checkForTie (){
-    return board.every((row) => row.every((cell) => cell));
-  
+ //   return board.every((row) => row.every((cell) => cell));
+      return board[0].every((cell) => cell)
   }
 
       
